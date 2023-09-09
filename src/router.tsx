@@ -8,6 +8,7 @@ export default class RouterModule extends React.Component {
             <Router>
                 <Routes>
                     <Route path='/' element={<App />}></Route>
+                    <Route path='/:index' element={<App />}></Route>
                     <Route path='/content/:index' element={<PageContent />}></Route>
                 </Routes>
             </Router>
