@@ -8,9 +8,9 @@ const gridStyle: React.CSSProperties = {
   width: '50%',
   textAlign: 'left',
 };
+
 const spin: React.CSSProperties = {
   padding: '50px',
-  background: 'rgba(0, 0, 0, 0.05)',
   borderRadius: '4px'
 };
 
@@ -50,11 +50,11 @@ function App() {
   }, [index_page])
 
   if (data.length === 0) {
-    return <>
-      <Spin tip="Loading" size="large" style={{ top: 200 }}>
-        <div style={spin} />
+    return (
+      <Spin tip="加载中……" size="large" style={{ marginTop: '10rem' }}>
+        <div style={spin} ></div>
       </Spin>
-    </>
+    )
   } else {
     return (
       <>
@@ -62,7 +62,7 @@ function App() {
           <Card title="斗破苍穹" className='novel_list'>
             {data.map((item, i) => <Card.Grid key={i} style={gridStyle} onClick={() => { handleClick(item.index) }}>{item.title}</Card.Grid>)}
           </Card>
-          <Pagination style={{ textAlign: 'center', marginTop: '1rem' }} simple defaultCurrent={1} current={index_page} total={1647} defaultPageSize={50}  onChange={change} responsive showSizeChanger={false} />
+          <Pagination style={{ textAlign: 'center', marginTop: '1rem' }} simple defaultCurrent={1} current={index_page} total={1647} defaultPageSize={50} onChange={change} responsive showSizeChanger={false} />
         </div>
         <FloatButton.BackTop visibilityHeight={window.screen.availHeight / 2} />
       </>
