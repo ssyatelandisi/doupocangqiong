@@ -20,7 +20,8 @@ interface Item {
 }
 
 function App() {
-  const [data, setData] = useState<Item[]>([]);
+  const [content, setContent] = useState<Item[]>([]);
+  const [total, setTotal] = useState(0);
   const params = useParams();
   const index_page = params.index ? Number(params.index) : 1;
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ function App() {
     navigate(`/content/${index}`, { state: { index_page } })
   }
   const change = (page: number) => {
-    setData([]);
+    setContent([]);
     navigate(`/${page}`);
   }
 
@@ -44,14 +45,15 @@ function App() {
       })
       .then(response => {
         if (response.data) {
-          setData(response.data);
+          setContent(response.data.content);
+          setTotal(response.data.total);
         }
       })
   }, [index_page])
 
-  if (data.length === 0) {
+  if (content.length === 0) {
     return (
-      <Spin tip="加载中……" size="large" style={{ marginTop: '10rem' }}>
+      <Spin tip="加载中…" size="large" style={{ marginTop: '10rem' }}>
         <div style={spin} ></div>
       </Spin>
     )
@@ -60,9 +62,9 @@ function App() {
       <>
         <div className={styles.content}>
           <Card title="斗破苍穹" className='novel_list'>
-            {data.map((item, i) => <Card.Grid key={i} style={gridStyle} onClick={() => { handleClick(item.index) }}>{item.title}</Card.Grid>)}
+            {content.map((item, i) => <Card.Grid key={i} style={gridStyle} onClick={() => { handleClick(item.index) }}>{item.title}</Card.Grid>)}
           </Card>
-          <Pagination style={{ textAlign: 'center', marginTop: '1rem' }} simple defaultCurrent={1} current={index_page} total={1647} defaultPageSize={50} onChange={change} responsive showSizeChanger={false} />
+          <Pagination style={{ textAlign: 'center', marginTop: '1rem' }} simple defaultCurrent={1} current={index_page} total={total} defaultPageSize={50} onChange={change} responsive showSizeChanger={false} />
         </div>
         <FloatButton.BackTop visibilityHeight={window.screen.availHeight / 2} />
       </>

@@ -25,11 +25,11 @@ function PageContent() {
     const location = useLocation();
     const navigate = useNavigate();
     const [index_page] = useState(location.state ? location.state.index_page : 1);//目录页
-    const [title, setTitle] = useState('');                                       //标题
+    const [title, setTitle] = useState('');                                 //标题
     const [previous, setPrevious] = useState(null);                               //上一页
     const [next, setNext] = useState(null);                                       //下一页
     const [content, setContent] = useState('');                                   //文档内容
-    const [contentPage, setContentPage] = useState(noYunyun);                           //背景样式
+    const [contentPage, setContentPage] = useState(noYunyun);                     //背景样式
     const [index, setIndex] = useState(params.index ? params.index : '1');        //文档索引序号
 
     useEffect(() => {
@@ -96,6 +96,7 @@ function PageContent() {
 function PagePrevious(props: any) {
     const navigate = useNavigate();//导航跳转
     const handleClick = () => {
+        document.title = '斗破苍穹';
         props.setTitle('');
         props.setContent('');
         props.setIndex(props.previous);
@@ -112,6 +113,7 @@ function PagePrevious(props: any) {
 function PageNext(props: any) {
     const navigate = useNavigate();
     const handleClick = () => {
+        document.title = '斗破苍穹';
         props.setTitle('');
         props.setContent('');
         props.setIndex(props.next);
