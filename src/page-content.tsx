@@ -36,10 +36,7 @@ function PageContent() {
         // axios.get(`http://127.0.0.1:8000/doupocangqiong/content/${index}`,
         axios.get(`https://server_api-1-h2090100.deta.app/doupocangqiong/content/${index}`,
             {
-                responseType: 'json',
-                headers: {
-                    "X-API-Key": "c0K3jSb9ZLED_pkzFXAm5i8QudrptwZT8xPNCpFtSnS3s"
-                }
+                responseType: 'json'
             })
             .then(function (response) {
                 if (response.data.content) {
